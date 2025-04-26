@@ -159,11 +159,25 @@ body {
   cursor: pointer;
   color: #333;
 }
+.popup-content {
+  background: rgba(255, 255, 255, 0.1); 
+  backdrop-filter: blur(15px);          
+  -webkit-backdrop-filter: blur(15px);  
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 40px 30px;
+  margin: 8% auto;
+  width: 400px;
+  border-radius: 12px;
+  position: relative;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+  animation: popupFade 0.3s ease;
+}
+
 
 .popup-content h2 {
   text-align: center;
   margin-bottom: 20px;
-  color: #333;
+  color: #ffffff;
 }
 
 #loginForm, #registerForm {
@@ -196,13 +210,15 @@ body {
 }
 
 .popup-content p {
-  margin-top: 10px;
   text-align: center;
   font-size: 14px;
 }
 
 .popup-content a {
-  color: #000;
   font-weight: bold;
   text-decoration: underline;
+}
+.popup-content p, .popup-content a {
+  margin-top: 20px;
+  color: #ffffff;
 }
