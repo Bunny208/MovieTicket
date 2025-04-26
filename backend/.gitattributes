@@ -1,0 +1,12 @@
+# Chuẩn hóa tất cả các file text về LF khi commit
+* text=auto
+
+# Bỏ qua xử lý line endings trong node_modules
+node_modules/** -text
+
+# Tùy chọn: xử lý cụ thể một số loại file
+*.js text
+*.css text
+*.html text
+*.json text
+*.md text

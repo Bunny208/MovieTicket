@@ -15,11 +15,12 @@ async function findUserByUsername(username) {
   try {
     const sql = 'SELECT * FROM users WHERE username = ?';
     const rows = await conn.query(sql, [username]);
-    return rows[0]; // trả về 1 user
+    return rows.length > 0 ? rows[0] : null;
   } finally {
     conn.release();
   }
 }
+
 
 module.exports = {
   createUser,

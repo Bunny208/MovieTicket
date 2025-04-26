@@ -8,7 +8,7 @@ async function register(req, res) {
   }
 
   const existingUser = await userModel.findUserByUsername(username);
-  if (existingUser) {
+  if (existingUser !== null) {
     return res.status(400).send('Username đã tồn tại.');
   }
 

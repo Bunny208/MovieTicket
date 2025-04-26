@@ -87,3 +87,84 @@ body {
   color: #aaa;
   border-top: 1px solid #222;
 }
+/* Popup style */
+.popup {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.7); /* đậm hơn tí */
+}
+
+.popup-content {
+  background: #fff;
+  padding: 40px 30px; /* tăng padding cho thoáng */
+  margin: 8% auto;
+  width: 400px; /* tăng độ rộng popup */
+  border-radius: 12px;
+  position: relative;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+  animation: popupFade 0.3s ease;
+}
+
+/* Hiệu ứng mở popup */
+@keyframes popupFade {
+  from { opacity: 0; transform: translateY(-50px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.close {
+  position: absolute;
+  top: 15px; right: 20px;
+  font-size: 24px;
+  cursor: pointer;
+  color: #333;
+}
+
+.popup-content h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+#loginForm, #registerForm {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+#loginForm input, #registerForm input {
+  padding: 12px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+#loginForm button, #registerForm button {
+  padding: 12px;
+  font-size: 16px;
+  background-color: #FFEBCD;
+  color: #000;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+  font-weight: bold;
+}
+
+#loginForm button:hover, #registerForm button:hover {
+  background-color: #FFDAB9;
+}
+
+.popup-content p {
+  margin-top: 10px;
+  text-align: center;
+  font-size: 14px;
+}
+
+.popup-content a {
+  color: #000;
+  font-weight: bold;
+  text-decoration: underline;
+}
