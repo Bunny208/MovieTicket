@@ -1,0 +1,107 @@
+/* style-register.css */
+
+/* Thiết lập chung cho body */
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to right, #6a11cb, #2575fc); /* giống style-index */
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  /* Container form đăng ký */
+  .register-box {
+    background: white;
+    padding: 35px;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    width: 320px;
+    text-align: center;
+    color: #333;
+  }
+  
+  /* Tiêu đề */
+  h1 {
+    color: #ff85b3;
+    font-size: 2.2rem;
+    margin-bottom: 25px;
+  }
+  
+  /* Ô nhập liệu */
+  input[type="text"], input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    margin: 12px 0;
+    border-radius: 6px;
+    border: 1.5px solid #f2c6d9;
+    background-color: #fbe1ec;
+    font-size: 1rem;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+  }
+  
+  input[type="text"]:focus, input[type="password"]:focus {
+    outline: none;
+    border-color: #ff85b3;
+    background-color: #ffe6f1;
+  }
+  
+  input[type="text"]:hover, input[type="password"]:hover {
+    border-color: #ff6699;
+  }
+  
+  /* Nút đăng ký */
+  button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    background: #ff85b3;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  button:hover {
+    background: #ff6699;
+    transform: translateY(-2px);
+  }
+  
+  /* Link chuyển qua đăng nhập (nếu có) */
+  .login-link {
+    display: inline-block;
+    margin-top: 15px;
+    color: #2575fc;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  .login-link:hover {
+    text-decoration: underline;
+  }
+  
+  /* Thông báo */
+  .alert {
+    margin-top: 15px;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+  }
+  
+  .alert.success {
+    background-color: #d4edda;
+    color: #155724;
+  }
+  
+  .alert.error {
+    background-color: #f8d7da;
+    color: #721c24;
+  }
+  
