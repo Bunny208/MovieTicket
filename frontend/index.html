@@ -55,10 +55,13 @@
     <div class="popup-content">
       <span class="close">×</span>
       <h2>Đăng ký</h2>
+      <!-- Form đăng ký -->
       <form id="registerForm">
         <input type="text" id="newUsername" name="newUsername" placeholder="Username" required><br>
+        <input type="text" id="newFullName" name="newFullName" placeholder="Họ và tên" required><br> 
         <input type="password" id="newPassword" name="newPassword" placeholder="Password" required><br>
-        <button type="submit">Đăng ký</button>
+        <input type="email" id="newEmail" name="newEmail" placeholder="Email" required><br>
+        <button type="submit">Đăng ký </button>
       </form>
       <p>Đã có tài khoản? <a href="#" id="switchToLogin">Đăng nhập</a></p>
     </div>
@@ -106,44 +109,66 @@
         const formData = new FormData(e.target);
         const username = formData.get('username');
         const password = formData.get('password');
-        console.log('Login form values:', { username, password });
+        console.log('Login form values:', { username, password }); // Log dữ liệu form
         const res = await fetch('/api/users/login', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ username, password })
         });
         const result = await res.json();
+        console.log('API login response:', result); // Log phản hồi API
         alert(result.message);
+        localStorage.setItem('fullName', result.full_name);
         if (res.ok) {
-          if (result.role === 'admin') {
-            window.location.href = '/pages/homeForAdmin.html';
-          } else if (result.role === 'user') {
-            window.location.href = '/pages/homeForUser.html';
-          }
-        }
-      });
+  localStorage.setItem('username', result.username);
+  localStorage.setItem('fullName', result.full_name);
+  
+  // Kiểm tra kỹ hơn giá trị email
+  console.log('Email value from API:', result.email);
+  if (result.email && result.email !== 'undefined' && result.email !== 'null') {
+    localStorage.setItem('email', result.email);
+  } else {
+    localStorage.setItem('email', '');
+  }
+  
+  // Log để kiểm tra
+  console.log('Stored in localStorage:', {
+    username: localStorage.getItem('username'),
+    fullName: localStorage.getItem('fullName'),
+    email: localStorage.getItem('email')
+  });
+  
+  // Tiếp tục với code chuyển hướng
+  if (result.role === 'admin') {
+    window.location.href = '/pages/homeForAdmin.html';
+  } else if (result.role === 'user') {
+    window.location.href = '/pages/homeForUser.html';
+  }
+}      });
 
-      // Xử lý đăng ký
       document.getElementById('registerForm').addEventListener('submit', async (e) => {
         e.preventDefault();
         const formData = new FormData(e.target);
         const username = formData.get('newUsername');
         const password = formData.get('newPassword');
-        console.log('Register form values:', { username, password });
+        const email = formData.get('newEmail');
+        const fullName = formData.get('newFullName');  
+
+        console.log('Register form values:', { username, password, email, fullName });
+
         const res = await fetch('/api/users/register', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ username, password })
+          body: JSON.stringify({ username, password, email, full_name: fullName })
         });
+
         const text = await res.text();
         alert(text);
+
         if (res.ok) {
-    // Đóng popup đăng ký
-    document.getElementById('registerPopup').style.display = 'none';
-    
-    // Mở popup đăng nhập
-    document.getElementById('loginForm').reset();
-    document.getElementById('loginPopup').style.display = 'block';
+          // Đóng popup đăng ký và mở popup đăng nhập
+          document.getElementById('registerPopup').style.display = 'none';
+          document.getElementById('loginPopup').style.display = 'block';
         }
       });
     });
