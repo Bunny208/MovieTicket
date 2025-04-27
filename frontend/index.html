@@ -120,31 +120,31 @@
         alert(result.message);
         localStorage.setItem('fullName', result.full_name);
         if (res.ok) {
-  localStorage.setItem('username', result.username);
-  localStorage.setItem('fullName', result.full_name);
-  
-  // Kiểm tra kỹ hơn giá trị email
-  console.log('Email value from API:', result.email);
-  if (result.email && result.email !== 'undefined' && result.email !== 'null') {
-    localStorage.setItem('email', result.email);
-  } else {
-    localStorage.setItem('email', '');
-  }
-  
-  // Log để kiểm tra
-  console.log('Stored in localStorage:', {
-    username: localStorage.getItem('username'),
-    fullName: localStorage.getItem('fullName'),
-    email: localStorage.getItem('email')
-  });
-  
-  // Tiếp tục với code chuyển hướng
-  if (result.role === 'admin') {
-    window.location.href = '/pages/homeForAdmin.html';
-  } else if (result.role === 'user') {
-    window.location.href = '/pages/homeForUser.html';
-  }
-}      });
+        localStorage.setItem('username', result.username);
+        localStorage.setItem('fullName', result.full_name);
+        
+        // Kiểm tra kỹ hơn giá trị email
+        console.log('Email value from API:', result.email);
+        if (result.email && result.email !== 'undefined' && result.email !== 'null') {
+          localStorage.setItem('email', result.email);
+        } else {
+          localStorage.setItem('email', '');
+        }
+        
+        // Log để kiểm tra
+        console.log('Stored in localStorage:', {
+          username: localStorage.getItem('username'),
+          fullName: localStorage.getItem('fullName'),
+          email: localStorage.getItem('email')
+        });
+        
+        // Tiếp tục với code chuyển hướng
+        if (result.role === 'admin') {
+          window.location.href = '/pages/homeForAdmin.html';
+        } else if (result.role === 'user') {
+          window.location.href = '/pages/homeForUser.html';
+        }
+      }      });
 
       document.getElementById('registerForm').addEventListener('submit', async (e) => {
         e.preventDefault();

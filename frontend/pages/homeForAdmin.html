@@ -1,52 +1,75 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Trang chính</title>
-  <link rel="stylesheet" href="/css/style-admin.css">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang chính</title>
+    <link rel="stylesheet" href="/css/admin.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
-  <!-- Navbar -->
-  <header class="navbar">
-    <div class="logo"><i class="fas fa-video"></i> Movie Ticket</div>
-
-    <div class="search-bar">
-      <input type="text" placeholder="Tìm phim, suất chiếu...">
-      <button>Tìm kiếm</button>
+    <div class="container">
+        <div class="header">
+            <div class="search-bar">
+                <input type="text" placeholder="Tìm phim, suất chiếu...">
+                <button>Tìm kiếm</button>
+            </div>
+            <div class="username">
+                <button id="userButton"><i class="fas fa-user"></i> <span id="usernameDisplay"></span></button>
+                <div id="userDropdown" class="dropdown-content">
+                    <a href="#">Thông tin tài khoản</a>
+                    <a href="#" id="logout">Đăng xuất</a>
+                </div>
+            </div>
+            <div id="accountInfoPopup" class="popup">
+                <div class="popup-content">
+                    <span class="close">&times;</span>
+                    <h2>Thông tin tài khoản</h2>
+                    <p><strong>Username:</strong> <span id="accountUsername"></span></p>
+                    <p><strong>Họ và tên:</strong> <span id="accountFullName"></span></p>
+                    <p><strong>Email:</strong> <span id="accountEmail"></span></p>
+                </div>
+            </div>
+        </div>
+        <div class="main">
+            <div class="nav">
+                <ul>
+                    <li><a href="#manage-films">Quản Lý Phim & Vé</a>
+                        <ul>
+                            <li><a href="#add-film">Quản lý Phim</a></li>
+                            <li><a href="#manage-showtimes">Quản Lý Suất Chiếu</a></li>
+                            <li><a href="#view-tickets">Quản Lý Vé</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#manage-users">Người Dùng & Cài Đặt</a>
+                        <ul>
+                            <li><a href="#manage-accounts">Quản Lý Tài Khoản Người Dùng</a></li>
+                            <li><a href="#manage-roles">Quản Lý Quyền Admin</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#reports">Thống Kê & Báo Cáo</a>
+                        <ul>
+                            <li><a href="#revenue-report">Báo Cáo Doanh Thu</a></li>
+                            <li><a href="#ticket-sales-report">Thống Kê Vé Bán</a></li>
+                            <li><a href="#current-movies-report">Thống Kê Phim Đang Chiếu</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="content">
+                <h2></h2>
+            </div>
+        </div>
+        <div class="footer">
+            <p>© 2025 Movie Ticket. All rights reserved.</p>
+            <p>Thực hiện bởi:</p>
+            <p>Liên hệ: support@movieticket.com</p>
+            <p>Hotline: 1800-123-456</p>
+        </div>
     </div>
-    <div class="username">
-      <button id="userButton"><i class="fas fa-user"></i> <span id="usernameDisplay"></span></button>
-      <div id="userDropdown" class="dropdown-content">
-        <a href="#">Thông tin tài khoản</a>
-        <a href="#" id="logout">Đăng xuất</a>
-      </div>
-    </div>
-    <div id="accountInfoPopup" class="popup">
-      <div class="popup-content">
-        <span class="close">×</span>
-        <h2>Thông tin tài khoản</h2>
-        <p><strong>Username:</strong> <span id="accountUsername"></span></p>
-        <p><strong>Họ và tên:</strong> <span id="accountFullName"></span></p>
-        <p><strong>Email:</strong> <span id="accountEmail"></span></p>
-      </div>
-    </div>
-    
-    
-  </header>
-
-  <!-- Main content -->
-  <main class="main-content">
-  </main>
-
-  <!-- Footer -->
-  <footer class="footer">
-    <p>© 2025 Movie Ticket. All rights reserved.</p>
-    <p>Thực hiện bởi : </p>
-    <p>Liên hệ: support@movieticket.com</p>
-    <p>Hotline: 1800-123-456</p>
-  </footer>
+</body>
+</html>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const username = localStorage.getItem('username');

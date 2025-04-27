@@ -1,59 +1,59 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Trang chính</title>
-  <script src="/js/script.js?t=<%= new Date().getTime() %>"></script>
-  <link rel="stylesheet" href="/css/style-admin.css">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang chính</title>
+    <link rel="stylesheet" href="/css/admin.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
-  <!-- Navbar -->
-  <header class="navbar">
-    <div class="logo"><i class="fas fa-video"></i> Movie Ticket</div>
-
-    <div class="search-bar">
-      <input type="text" placeholder="Tìm phim, suất chiếu...">
-      <button>Tìm kiếm</button>
+    <div class="container">
+        <div class="header">
+            <div class="search-bar">
+                <input type="text" placeholder="Tìm phim, suất chiếu...">
+                <button>Tìm kiếm</button>
+            </div>
+            <div class="username">
+                <button id="userButton"><i class="fas fa-user"></i> <span id="usernameDisplay"></span></button>
+                <div id="userDropdown" class="dropdown-content">
+                    <a href="#">Thông tin tài khoản</a>
+                    <a href="#" id="logout">Đăng xuất</a>
+                </div>
+            </div>
+            <div id="accountInfoPopup" class="popup">
+                <div class="popup-content">
+                    <span class="close">&times;</span>
+                    <h2>Thông tin tài khoản</h2>
+                    <p><strong>Username:</strong> <span id="accountUsername"></span></p>
+                    <p><strong>Họ và tên:</strong> <span id="accountFullName"></span></p>
+                    <p><strong>Email:</strong> <span id="accountEmail"></span></p>
+                </div>
+            </div>
+        </div>
+        <div class="main">
+            <div class="nav">
+            </div>
+            <div class="content">
+                <h2></h2>
+            </div>
+        </div>
+        <div class="footer">
+            <p>© 2025 Movie Ticket. All rights reserved.</p>
+            <p>Thực hiện bởi:</p>
+            <p>Liên hệ: support@movieticket.com</p>
+            <p>Hotline: 1800-123-456</p>
+        </div>
     </div>
-    <div class="username">
-      <button id="userButton"><i class="fas fa-user"></i> <span id="usernameDisplay"></span></button>
-      <div id="userDropdown" class="dropdown-content">
-        <a href="#">Thông tin tài khoản</a>
-        <a href="#" id="logout">Đăng xuất</a>
-      </div>
-    </div>
-    <div id="accountInfoPopup" class="popup">
-      <div class="popup-content">
-        <span class="close">×</span>
-        <h2>Thông tin tài khoản</h2>
-        <p><strong>Username:</strong> <span id="accountUsername"></span></p>
-        <p><strong>Họ và tên:</strong> <span id="accountFullName"></span></p>
-        <p><strong>Email:</strong> <span id="accountEmail"></span></p>
-      </div>
-    </div>
-    
-    
-  </header>
-
-  <!-- Main content -->
-  <main class="main-content">
-  </main>
-
-  <!-- Footer -->
-  <footer class="footer">
-    <p>© 2025 Movie Ticket. All rights reserved.</p>
-    <p>Thực hiện bởi : </p>
-    <p>Liên hệ: support@movieticket.com</p>
-    <p>Hotline: 1800-123-456</p>
-  </footer>
+</body>
+</html>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const username = localStorage.getItem('username');
       const fullName = localStorage.getItem('fullName');
-      const email = localStorage.getItem('email') || 'Không có email';
-      document.getElementById('accountEmail').textContent = email;
+      const email = localStorage.getItem('email');
+      console.log('localStorage values in homeForAdmin:', { username, fullName, email }); // Log giá trị localStorage
 
       if (username) {
         document.getElementById('usernameDisplay').textContent = username;
@@ -68,39 +68,33 @@
         userDropdown.style.display = userDropdown.style.display === 'block' ? 'none' : 'block';
       });
 
-      // Khi click vào "Thông tin tài khoản"
       const accountLink = document.querySelector('.dropdown-content a[href="#"]');
       accountLink.addEventListener('click', (e) => {
         e.preventDefault();
-        document.getElementById('accountUsername').textContent = username;
-        document.getElementById('accountFullName').textContent = fullName;
-        document.getElementById('accountEmail').textContent = email;
-        accountInfoPopup.style.display = 'flex'; // Mở popup
+        document.getElementById('accountUsername').textContent = username || 'Không có username';
+        document.getElementById('accountFullName').textContent = fullName || 'Không có tên';
+        document.getElementById('accountEmail').textContent = 
+        (email && email !== 'undefined' && email !== 'null') ? email : 'Không có email';
+        console.log('Displayed account info:', { username, fullName, email }); // Log giá trị hiển thị
+        accountInfoPopup.style.display = 'flex';
       });
 
-      // Đóng popup khi click vào dấu X
       closePopup.addEventListener('click', () => {
         accountInfoPopup.style.display = 'none';
       });
 
-      // Ẩn dropdown nếu click ra ngoài
       window.addEventListener('click', (event) => {
         if (!event.target.closest('.username')) {
           userDropdown.style.display = 'none';
         }
       });
 
-      // Xử lý nút đăng xuất
       const logoutLink = document.getElementById('logout');
       logoutLink.addEventListener('click', () => {
-        localStorage.removeItem('username');
-        localStorage.removeItem('fullName');
-        localStorage.removeItem('email');
+        localStorage.clear();
         window.location.href = '/index.html';
       });
     });
-
-
   </script>
 </body>
 </html>
